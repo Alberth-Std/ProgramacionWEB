@@ -1,12 +1,19 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
-const routes = require('./routes');
 require('dotenv').config();
+
+// Importar conexión Mongo
+const connectDB = require('./config/db');
+
+// Importar rutas
+const routes = require('./routes');
 
 const app = express();
 
-// Middleware
+// Conectar a MongoDB
+connectDB();
+
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
@@ -17,12 +24,6 @@ app.use('/api', routes);
 app.get('/', (req, res) => {
   res.json({ message: 'API de Cuestionarios funcionando (esqueleto).' });
 });
-
-// Conexión con MongoDB
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/cuestionarios';
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('✅ Conectado a MongoDB'))
-  .catch(err => console.error('❌ Error al conectar a MongoDB:', err.message));
 
 // Iniciar servidor
 const PORT = process.env.PORT || 3000;
