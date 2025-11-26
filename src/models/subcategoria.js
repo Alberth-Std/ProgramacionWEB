@@ -1,3 +1,4 @@
+// src/models/subcategoria.js
 const mongoose = require('mongoose');
 
 const SubcategoriaSchema = new mongoose.Schema({

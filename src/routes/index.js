@@ -14,5 +14,6 @@ router.use('/respuesta', respuestaRoutes);
 router.use('/categorias', require('./categoriaRoutes'));
 router.use('/cuestionario', cuestionarioRoutes);
 router.use('/rango-edad', require('./rangoEdadRoutes'));
+router.use('/subcategorias', require('./subcategoriaRoutes')); 
 
 module.exports = router;
