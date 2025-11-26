@@ -13,5 +13,6 @@ router.use('/pregunta', preguntaRoutes);
 router.use('/respuesta', respuestaRoutes);
 router.use('/categoria', categoriaRoutes);
 router.use('/cuestionario', cuestionarioRoutes);
+router.use('/rango-edad', require('./rangoEdadRoutes'));
 
 module.exports = router;
