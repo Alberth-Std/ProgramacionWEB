@@ -1,3 +1,4 @@
+// src/models/Categoria.js
 const mongoose = require('mongoose');
 
 const CategoriaSchema = new mongoose.Schema({

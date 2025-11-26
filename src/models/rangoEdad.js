@@ -1,3 +1,4 @@
+// src/models/rangoEdad.js
 const mongoose = require('mongoose');
 
 const RangoEdadSchema = new mongoose.Schema({
