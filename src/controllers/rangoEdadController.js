@@ -3,13 +3,26 @@ const RangoEdad = require('../models/rangoEdad');
 
 exports.crearRangoEdad = async (req, res) => {
   try {
-    // ✅ AÑADIR ESTA VALIDACIÓN
+    //  AÑADIR ESTA VALIDACIÓN
     const { edadMinima, edadMaxima, descripcion } = req.body;
     
     // Verificar que los campos requeridos existan
     if (edadMinima === undefined || edadMaxima === undefined) {
       return res.status(400).json({ 
         error: "Los campos edadMinima y edadMaxima son requeridos" 
+      });
+    }
+ 
+    // Verificar que los campos requeridos no sean negativos
+    if (edadMinima<0 || edadMaxima<0) {
+      return res.status(400).json({ 
+        error: "Las edades no pueden ser negativas" 
+      });
+    }
+    //verificar que edadMinima no sea mayor que edadMaxima
+    if (edadMinima > edadMaxima) {
+      return res.status(400).json({ 
+        error: "La edad mínima no puede ser mayor que la edad máxima" 
       });
     }
 
