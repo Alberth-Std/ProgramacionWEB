@@ -8,10 +8,10 @@ const categoriaRoutes = require('./categoriaRoutes');
 const cuestionarioRoutes = require('./cuestionarioRoutes');
 
 // Agrupamos todas las rutas
-router.use('/usuarios', usuarioRoutes);
-router.use('/preguntas', preguntaRoutes);
-router.use('/respuestas', respuestaRoutes);
-router.use('/categorias', categoriaRoutes);
-router.use('/cuestionarios', cuestionarioRoutes);
+router.use('/usuario', usuarioRoutes);
+router.use('/pregunta', preguntaRoutes);
+router.use('/respuesta', respuestaRoutes);
+router.use('/categoria', categoriaRoutes);
+router.use('/cuestionario', cuestionarioRoutes);
 
 module.exports = router;
