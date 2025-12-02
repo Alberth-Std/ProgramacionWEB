@@ -1,12 +1,14 @@
 // src/routes/categoriaRoutes.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const categoriaController = require('../controllers/categoriaController');
 
-// Ruta para crear una nueva categoría
-router.post('/', categoriaController.crearCategoria);
+const { crearCategoria, obtenerCategorias } = require("../controllers/categoriaController");
+const { auth } = require("../middlewares/authMiddleware");
 
-// Ruta para obtener todas las categorías
-router.get('/', categoriaController.obtenerCategorias);
+// Crear categoría – solo admin
+router.post("/", auth(["admin"]), crearCategoria);
+
+// Obtener categorías – cualquier usuario logueado
+router.get("/", auth(), obtenerCategorias);
 
 module.exports = router;
