@@ -3,7 +3,7 @@ const Categoria = require('../models/Categoria');
 
 exports.crearCategoria = async (req, res) => {
   try {
-    // ✅ VERIFICAR PRIMERO QUE req.body EXISTA
+    //  VERIFICAR PRIMERO QUE req.body EXISTA
     if (!req.body) {
       return res.status(400).json({ error: 'El cuerpo de la solicitud está vacío' });
     }
@@ -23,7 +23,7 @@ exports.crearCategoria = async (req, res) => {
     
     const data = await categoria.save();
     
-    // ✅ RESPONDER CON LA ESTRUCTURA QUE ESPERAN TUS TESTS
+    //  RESPONDER CON LA ESTRUCTURA QUE ESPERAN TUS TESTS
     res.status(201).json({
       name: data.nombre,  // Para que pase el test "A name is returned"
       ...data._doc        // Incluir todos los demás campos

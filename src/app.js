@@ -1,4 +1,5 @@
 // src/app.js
+const authRoutes = require("./routes/authRoutes");
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -25,6 +26,8 @@ app.use('/api', routes);
 app.get('/', (req, res) => {
   res.json({ message: 'API de Cuestionarios funcionando (esqueleto).' });
 });
+
+app.use("/api/auth", authRoutes);
 
 // Iniciar servidor
 const PORT = process.env.PORT || 3000;
