@@ -1,14 +1,9 @@
-// src/app.js
-const authRoutes = require("./routes/authRoutes");
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-// Importar conexión Mongo
 const connectDB = require('./config/db');
-
-// Importar rutas
-const routes = require('./routes');
+const routes = require('./routes'); // index.js con todas las rutas agrupadas
 
 const app = express();
 
@@ -24,11 +19,9 @@ app.use('/api', routes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
-  res.json({ message: 'API de Cuestionarios funcionando (esqueleto).' });
+  res.json({ message: 'API de Cuestionarios funcionando.' });
 });
-
-app.use("/api/auth", authRoutes);
 
 // Iniciar servidor
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Servidor escuchando en http://localhost:${PORT}`));
