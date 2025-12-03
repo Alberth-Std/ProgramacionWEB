@@ -1,4 +1,4 @@
-const Usuario = require("../models/usuario");
+const Usuario = require("../models/Usuario");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -59,11 +59,3 @@ exports.getUsuarios = async (req, res) => {
   }
 };
 
-exports.getUsuarios = async (req, res) => {
-  try {
-    const usuarios = await Usuario.find().select("-password");
-    res.json(usuarios);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
