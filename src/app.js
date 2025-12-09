@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 
-const routes = require('./routes');
+const connectDB = require('./config/db');
+const routes = require('./routes'); // index.js con rutas agrupadas
 
 const app = express();
 
