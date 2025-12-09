@@ -1,2 +1,5 @@
 /node_modules
 .env
+# Certificados SSL
+cert/server.key
+cert/server.csr
