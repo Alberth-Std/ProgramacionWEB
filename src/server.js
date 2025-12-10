@@ -42,5 +42,5 @@ http2Server.on("stream", (stream, headers) => {
 });
 
 http2Server.listen(4000, () => {
-  console.log("Servidor HTTP/2 → https://localhost:400");
+  console.log("Servidor HTTP/2 → https://localhost:4000");
 });
