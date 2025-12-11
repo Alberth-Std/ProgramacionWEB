@@ -1,4 +1,3 @@
-// src/server.js
 require("dotenv").config();
 const fs = require("fs");
 const http = require("http");
@@ -27,7 +26,7 @@ https.createServer({ key, cert }, app).listen(3443, () => {
 
 
 // HTTP/2
-const http2Server = http2.createSecureServer({ key, cert });
+const http2Server = http2.createSecureServer({ key, cert }, app);
 
 http2Server.on("stream", (stream, headers) => {
   // Respuesta simple compatible con HTTP/2
