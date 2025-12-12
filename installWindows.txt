@@ -1,0 +1,202 @@
+Instrucciones para Probar el Proyecto Enfocado en SO Windows
+1. Requisitos previos
+Para ejecutar este proyecto en tu dispositivo con Windows, necesitas tener instalados los siguientes programas 
+y herramientas:
+Visual Studio Code (VSCode)
+Este proyecto está desarrollado utilizando Visual Studio Code como editor. Asegúrate de tenerlo instalado junto con la extensión de Node.js.
+
+Pasos para habilitar Node.js en Visual Studio:
+
+Abre el instalador de Visual Studio.
+Selecciona la versión de Visual Studio que tienes instalada.
+Haz clic en Modificar.
+En la lista de cargas de trabajo, selecciona Desarrollo de Node.js.
+Esto incluye soporte para proyectos Node.js, IntelliSense, depuración y plantillas de Express.
+Haz clic en Instalar o Modificar para aplicar los cambios.
+Una vez completado, abre Visual Studio y tendrás disponibles las plantillas de Node.js.
+
+
+2. Cuenta en GitHub y Git Bash
+Crear una cuenta en GitHub: Asegúrate de tener una cuenta en GitHub
+
+Instalar Git Bash:
+Descarga Git desde su página oficial.
+Selecciona el instalador adecuado para Windows (.exe).
+
+
+3. Descargar y Clonar el Proyecto desde GitHub
+Crea una carpeta donde guardarás el proyecto.
+Usa Git Bash para clonar el proyecto:
+Abre Git Bash y navega a la carpeta donde quieres descargar el proyecto.
+Usa el siguiente comando para clonar el proyecto:
+git clone https://github.com/Alberth-Std/ProgramacionWEB.git
+
+
+4. Instalar y Verificar Dependencias en Visual Studio Code
+Abre la terminal de Visual Studio Code.
+Ejecuta el siguiente comando para instalar las dependencias necesarias:
+    npm install
+    Instala las dependencias adicionales:
+    npm install spdy
+
+Verifica las versiones instaladas:
+    node -v
+    npm -v
+    git --version
+    openssl version
+
+5. Configuración del Entorno
+
+Crear el archivo .env:
+En el directorio raíz del proyecto, crea un archivo llamado .env y edítalo con:
+nano .env
+Añade las siguientes líneas en el archivo .env:
+MONGODB_URI=mongodb+srv://docente:12122025@cluster0.o53ctwr.mongodb.net/cuestionarios
+PORT=3000
+
+Crear la carpeta de certificados:
+En el directorio raíz del proyecto, crea una carpeta llamada cert.
+Importante: No subas certificados ni credenciales a GitHub. Asegúrate de que los archivos de configuración y las credenciales estén fuera de tu repositorio público.
+
+Descarga OpenSSL
+ para generar los certificados necesarios.
+
+Ejecuta los siguientes comandos en Git Bash para generar los archivos:
+openssl genpkey -algorithm RSA -out cert/server.key
+openssl req -new -key cert/server.key -out cert/server.csr
+openssl x509 -req -in cert/server.csr -signkey cert/server.key -out cert/server.cert
+
+Esto generará tres archivos en la carpeta cert/:
+server.key: Clave privada.
+server.cert: Certificado público.
+server.csr: Solicitud de firma del certificado (no es necesaria para este proyecto, pero es parte del proceso).
+
+
+6. Iniciar el Backend
+
+Para iniciar el servidor backend, ejecuta el siguiente comando en la terminal de Visual Studio Code:
+npm run dev
+Verificación:
+Si el backend se inicia correctamente, deberías ver el siguiente mensaje en la consola:
+
+Servidor HTTP escuchando en http://localhost:3000
+Servidor HTTPS escuchando en https://localhost:3443
+Servidor SPDY/HTTP2 escuchando en https://localhost:4000
+✅ Conectado a MongoDB Atlas
+
+
+Esto indica que:
+El servidor HTTP está activo.
+El servidor HTTPS está activo.
+El servidor SPDY/HTTP2 está activo.
+La conexión a MongoDB Atlas fue exitosa.
+
+
+7. Crear Cuenta en Postman
+Crear una cuenta en Postman: Regístrate en Postman
+Instalar el agente Postman: Descarga el agente Postman desde su página para realizar pruebas en el navegador.
+
+
+8. Pruebas de la API con Postman
+A continuación se presentan los endpoints principales para probar la API:
+
+Registro de Usuario (No es necesario estar logeado)             (Dentro de Postman)
+POST https://localhost:4000/api/auth/register       (HTTP/2) Settings -> HTTP version (HTTP 2)
+POST https://localhost:3443/api/auth/register       (HTTPS) Settings -> HTTP version (HTTP 1)
+POST http://localhost:3000/api/auth/register        (HTTP) Settings -> HTTP version (HTTP 1)
+
+Login:
+POST https://localhost:4000/api/auth/login          (HTTP/2) Settings -> HTTP version (HTTP 2)
+POST https://localhost:3443/api/auth/login          (HTTPS) Settings -> HTTP version (HTTP 1)
+POST http://localhost:3000/api/auth/login           (HTTP) Settings -> HTTP version (HTTP 1)
+
+Listar Usuarios:
+
+GET https://localhost:4000/api/usuarios             (HTTP/2) Settings -> HTTP version (HTTP 2)
+GET https://localhost:3443/api/usuarios             (HTTPS) Settings -> HTTP version (HTTP 1)
+GET http://localhost:3000/api/usuarios              (HTTP) Settings -> HTTP version (HTTP 1)
+
+Endpoints Protegidos:
+Para los endpoints protegidos, debes usar el token JWT obtenido después de hacer login. 
+En Postman, en la sección de Authorization, selecciona Bearer Token e ingresa el token generado.
+
+
+8.1 Crear Usuario Administrador
+Endpoint:
+
+POST https://localhost:4000/api/auth/register       (HTTP/2) Settings -> HTTP version (HTTP 2)
+POST https://localhost:3443/api/auth/register       (HTTPS) Settings -> HTTP version (HTTP 1)
+POST http://localhost:3000/api/auth/register        (HTTP) Settings -> HTTP version (HTTP 1)
+
+Body -> raw -> (JSON):
+
+{
+  "nombre": "Admin",
+  "correo": "admin@demo.com",
+  "password": "123456",
+  "rol": "admin"
+}
+
+
+Respuesta Esperada:
+
+{
+  "message": "Usuario registrado",
+  "usuario": {
+    "_id": "...",
+    "nombre": "Admin",
+    "correo": "admin@demo.com",
+    "rol": "admin"
+  }
+}
+
+
+8.2 Login y Obtención del Token JWT
+
+Endpoint:
+
+POST https://localhost:4000/api/auth/login        (HTTP/2) Settings -> HTTP version (HTTP 2)
+POST https://localhost:3443/api/auth/login        (HTTPS) Settings -> HTTP version (HTTP 1)
+POST http://localhost:3000/api/auth/login         (HTTP) Settings -> HTTP version (HTTP 1)
+
+Body -> raw -> (JSON):
+
+{
+  "correo": "admin@demo.com",
+  "password": "123456"
+}
+
+
+Respuesta Esperada:
+
+{
+  "token": "JWT_GENERADO"
+}
+
+
+8.3 Poblado de Entidades del Sistema
+Una vez autenticado como usuario administrador, puedes crear datos base para el sistema.
+
+Ejemplo: Crear Categorías
+
+Endpoint:
+
+POST https://localhost:4000/api/categorias        (HTTP/2) Settings -> HTTP version (HTTP 2)
+POST https://localhost:3443/api/categorias        (HTTPS) Settings -> HTTP version (HTTP 1)
+POST http://localhost:3000/api/categorias         (HTTP) Settings -> HTTP version (HTTP 1)
+
+Body -> raw -> (JSON):
+
+{
+  "nombre": "Programación",
+  "descripcion": "Preguntas relacionadas a programación",
+  "estado": "true"
+}
+
+
+8.4 Verificación del Poblado
+
+Para verificar que los datos fueron insertados correctamente:
+GET https://localhost:4000/api/usuarios            (HTTP/2) Settings -> HTTP version (HTTP 2)
+GET https://localhost:3443/api/categorias          (HTTPS) Settings -> HTTP version (HTTP 1)
+GET http://localhost:3000/api/preguntas            (HTTP) Settings -> HTTP version (HTTP 1)
