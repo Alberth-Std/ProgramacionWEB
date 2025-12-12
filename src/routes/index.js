@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 router.use('/auth', require('./authRoutes'));
-router.use('/usuario', require('./usuarioRoutes'));
+router.use('/usuarios', require('./usuarioRoutes'));
 router.use('/pregunta', require('./preguntaRoutes'));
 router.use('/respuesta', require('./respuestaRoutes'));
 router.use('/categorias', require('./categoriaRoutes'));
