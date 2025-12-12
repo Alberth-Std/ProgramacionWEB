@@ -1,5 +1,7 @@
-/node_modules
+# Variables de entorno
 .env
-# Certificados SSL
-cert/server.key
-cert/server.csr
+
+# Certificados SSL (se generan localmente)
+cert/*.key
+cert/*.cert
+cert/*.csr
