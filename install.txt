@@ -1,0 +1,73 @@
+Instrucciones para Probar el Proyecto
+1.- Para poder ejecutar este proyecto en su propio dispositivo, es necesario contar con algunos 
+programas y herramientas previas:
+
+Visual Studio Code (VSCode): Este proyecto está desarrollado usando Visual Studio Code como 
+editor. Asegúrate de tenerlo instalado con la extensión de Node.js
+
+Pasos detallados para habilitar Node.js en Visual Studio:
+Abrir el instalador de Visual Studio
+    -En Windows, busca Visual Studio Installer en el menú inicio.
+    -Si no lo tienes, descárgalo desde la página oficial de Visual Studio.
+
+Modificar tu instalación actual
+    -Selecciona la versión de Visual Studio que ya tienes instalada.
+    -Haz clic en Modificar.
+
+Seleccionar la carga de trabajo adecuada
+    -En la lista de cargas de trabajo, marca Desarrollo de Node.js.
+    -Esto incluye soporte para proyectos Node.js, IntelliSense, depuración y plantillas de Express.
+
+Instalar y reiniciar Visual Studio
+    -Pulsa en Instalar o Modificar para aplicar los cambios.
+    -Una vez completado, abre Visual Studio y ya tendrás disponibles las plantillas de Node.js.
+
+2.- Tener una cuenta en GitHub y tener Instalado Git Bash
+Descargar Git desde la pagina principal y seleccionar tu sistema operativo
+    -Windows: Descarga el instalador .exe
+    -Linux/Mac: Normalmente ya viene instalado, pero también puedes usar el paquete de tu sistema.
+
+3.-Pasos para descargar y correr un proyecto de GitHub
+Crear una carpeta para poder descargar el proyecto
+    -Usa Git Bash para descarga el proyecto
+    -Ir a la carpeta donde quieres guardar el proyecto
+
+Clonar el proyecto desde GitHub
+    -Tener el Url del proyecto
+    -Usar el comando de git clone URL_DEL_PROYECTO
+
+4.-Instalar las dependencias en Visual Studio Code
+    -Abrir la terminal de Visual Studio Code 
+    -Ingresar el comando npm install
+    -Ingresar el comando npm install mongodb
+
+5.-Configuración del Entorno
+Crear el Archivo .env
+    -En el directorio raíz del proyecto, crea un archivo llamado .env
+    -Añade las siguientes lineas:
+        MONGODB_URI=mongodb+srv://Erick:web2025@cluster0.o53ctwr.mongodb.net/cuestionarios
+        PORT=3000
+
+Crear la carpeta de certificados
+    -En el directorio raíz del proyecto, crea un archivo llamado cert
+    -Ejecuta los siguientes comandos para generar los archivos necesarios:
+        openssl genpkey -algorithm RSA -out cert/server.key
+        openssl req -new -key cert/server.key -out cert/server.csr
+        openssl x509 -req -in cert/server.csr -signkey cert/server.key -out cert/server.cert
+
+    Esto generará tres archivos en la carpeta cert/:
+        server.key: La clave privada.
+        server.cert: El certificado público.
+        server.csr: La solicitud de firma del certificado (no necesaria para este proyecto, pero es parte del proceso).
+
+4.- Encender el backend
+Iniciar el servidor
+-En el terminal de Visual Studio Code ejecutar  npm run dev
+
+Verificacion 
+-Debe mostrarte la consola si se encendio bien:
+
+Servidor HTTP escuchando en http://localhost:3000
+Servidor HTTPS escuchando en https://localhost:3443
+Servidor SPDY/HTTP2 escuchando en https://localhost:4000
+✅ Conectado a MongoDB Atlas
