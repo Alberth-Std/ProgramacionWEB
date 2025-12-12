@@ -5,3 +5,6 @@
 cert/*.key
 cert/*.cert
 cert/*.csr
+
+# Dependencias
+node_modules/
