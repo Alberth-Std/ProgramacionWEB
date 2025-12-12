@@ -17,8 +17,15 @@ exports.register = async (req, res) => {
       password: hash,
       rol
     });
-
-    res.json({ message: "Usuario registrado", user });
+    res.status(201).json({
+      message: "Usuario registrado",
+      usuario: {
+      _id: user._id,
+      nombre: user.nombre,
+      correo: user.correo,
+      rol: user.rol
+      }
+    });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
